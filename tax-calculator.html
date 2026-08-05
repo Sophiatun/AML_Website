@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax Calculator — Anne Liang CPA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Libre+Franklin:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <nav id="nav">
+      <div class="container">
+        <a href="index.html" class="nav-brand">
+          <img src="logo-icon.png" class="nav-logo" alt="Anne Liang CPA" />
+          <span class="nav-brand-name">Anne Liang, <em>CPA</em></span>
+        </a>
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <div class="nav-item">
+            <a href="index.html#services" class="nav-dropdown-trigger"
+              >Services
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M6 9l6 6 6-6" /></svg
+            ></a>
+            <div class="nav-dropdown">
+              <a href="tax-advisory.html">Tax Strategy &amp; Planning</a>
+              <a href="tax-preparation.html">Tax Preparation</a>
+            </div>
+          </div>
+          <a href="tax-calculator.html" class="active">Tax Calculator</a>
+          <a href="index.html#contact" class="nav-cta"
+            >Schedule a Consultation</a
+          >
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <header class="page-header">
+      <div class="container">
+        <div class="page-kicker">Tax Calculator &middot; 2025 Tax Year</div>
+        <h1>What's Your <em>Rough Number?</em></h1>
+        <p>
+          A directional estimate of federal income tax, payroll and
+          self-employment tax, NIIT, and state tax — built for income that
+          comes from more than one place.
+        </p>
+      </div>
+    </header>
+
+    <section class="services">
+      <div class="container">
+        <div class="estimator-layout">
+          <div class="estimator-wrap reveal">
+            <form id="estimatorForm">
+              <div class="form-row">
+                <label for="est-filing-status">Filing Status</label>
+                <select id="est-filing-status" name="filingStatus">
+                  <option value="single">Single</option>
+                  <option value="mfj">Married Filing Jointly</option>
+                  <option value="mfs">Married Filing Separately</option>
+                  <option value="hoh">Head of Household</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="est-state">State</label>
+                <select id="est-state" name="state">
+                  <option value="">Select a state</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="est-state-rate"
+                  >Estimated State Income Tax Rate (%)</label
+                >
+                <input
+                  type="number"
+                  id="est-state-rate"
+                  name="stateRate"
+                  min="0"
+                  step="0.1"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <label for="est-w2">W-2 Wages ($)</label>
+                <input
+                  type="number"
+                  id="est-w2"
+                  name="w2Wages"
+                  min="0"
+                  step="1000"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <label for="est-se"
+                  >Self-Employment / Schedule C, Net ($)</label
+                >
+                <input
+                  type="number"
+                  id="est-se"
+                  name="seNet"
+                  min="0"
+                  step="1000"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <label for="est-k1"
+                  >K-1 Income, Partnerships / S-Corps ($)</label
+                >
+                <input
+                  type="number"
+                  id="est-k1"
+                  name="k1Income"
+                  min="0"
+                  step="1000"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <label for="est-ltcg">Long-Term Capital Gains ($)</label>
+                <input
+                  type="number"
+                  id="est-ltcg"
+                  name="ltcg"
+                  min="0"
+                  step="1000"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <label for="est-other">Other Income ($)</label>
+                <input
+                  type="number"
+                  id="est-other"
+                  name="otherIncome"
+                  min="0"
+                  step="1000"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <label for="est-dependents">Dependents</label>
+                <input
+                  type="number"
+                  id="est-dependents"
+                  name="dependents"
+                  min="0"
+                  step="1"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <label for="est-deduction-method">Deductions</label>
+                <select id="est-deduction-method" name="deductionMethod">
+                  <option value="standard">Standard deduction</option>
+                  <option value="itemized">Itemized deduction</option>
+                </select>
+              </div>
+              <div
+                class="form-row"
+                id="itemizedAmountRow"
+                style="display: none"
+              >
+                <label for="est-itemized">Itemized Deduction Amount ($)</label>
+                <input
+                  type="number"
+                  id="est-itemized"
+                  name="itemizedAmount"
+                  min="0"
+                  step="1000"
+                  value="0"
+                />
+              </div>
+              <div class="form-row">
+                <div class="radio-option" style="max-width: 260px">
+                  <input
+                    type="checkbox"
+                    id="est-niit"
+                    name="niitEnabled"
+                    style="position: static; opacity: 1; width: auto"
+                  />
+                  <label
+                    for="est-niit"
+                    style="display: inline; padding: 0; border: none"
+                    >Include NIIT (3.8%) if applicable</label
+                  >
+                </div>
+              </div>
+            </form>
+            <p
+              style="
+                font-size: 12px;
+                color: var(--text-muted);
+                margin-top: 16px;
+                text-align: center;
+              "
+            >
+              Numbers update automatically as you type.
+            </p>
+          </div>
+
+          <div class="estimator-wrap reveal reveal-delay-1">
+            <div class="estimator-results" id="estimatorResults">
+              <div class="estimator-result-label">
+                Estimated Total Taxes (Federal + Payroll/SE + NIIT + State)
+              </div>
+              <div
+                class="estimator-result-num estimator-result-hero"
+                id="resTotal"
+              >
+                —
+              </div>
+              <div class="estimator-results-grid">
+                <div class="estimator-result-item">
+                  <div class="estimator-result-label">Effective Rate</div>
+                  <div class="estimator-result-num" id="resEffective">—</div>
+                </div>
+                <div class="estimator-result-item">
+                  <div class="estimator-result-label">
+                    Marginal Rate (Fed)
+                  </div>
+                  <div class="estimator-result-num" id="resMarginal">—</div>
+                </div>
+              </div>
+              <div class="estimator-line-items">
+                <div class="estimator-line">
+                  <span>Federal income tax (est.)</span
+                  ><span id="resFederal">—</span>
+                </div>
+                <div class="estimator-line">
+                  <span>Payroll taxes (FICA + Addl. Medicare)</span
+                  ><span id="resPayroll">—</span>
+                </div>
+                <div class="estimator-line">
+                  <span>Self-employment tax</span><span id="resSE">—</span>
+                </div>
+                <div class="estimator-line">
+                  <span>NIIT (3.8%, if applicable)</span
+                  ><span id="resNiit">—</span>
+                </div>
+                <div class="estimator-line">
+                  <span>State income tax (est.)</span
+                  ><span id="resState">—</span>
+                </div>
+                <div class="estimator-line">
+                  <span>Dependent credit (est.)</span
+                  ><span id="resCredit">—</span>
+                </div>
+              </div>
+              <div class="estimator-line estimator-line-total">
+                <span>After-tax income (est.)</span
+                ><span id="resAfterTax">—</span>
+              </div>
+              <p class="estimator-disclaimer">
+                This is a simplified, directional estimate using 2025
+                federal tax rules. It does not fully model AMT, credits,
+                phaseouts, QBI, or state/local specifics — it is not tax
+                advice. For an accurate, personalized number, a Tax
+                Assessment is the next step.
+              </p>
+              <div class="advisory-cta" style="margin-top: 0">
+                <a href="index.html#contact" class="btn-primary"
+                  >Schedule a Discovery Call
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" /></svg
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-block">
+          <div class="story-kicker">What Happens Next</div>
+          <p
+            style="
+              text-align: center;
+              color: var(--text-muted);
+              max-width: 620px;
+              margin: 0 auto 32px;
+              font-size: 15px;
+              line-height: 1.8;
+            "
+          >
+            This number reflects where things are headed if nothing changes
+            between now and next April. For clients paying $150K+ in federal
+            tax, that trajectory is rarely fixed — it's usually the result of
+            decisions that were never revisited. A Discovery Call costs
+            nothing and tells you whether there's real room to move this
+            number before the year closes.
+          </p>
+          <div class="advisory-cta" style="margin-top: 0">
+            <a href="tax-advisory.html" class="btn-secondary"
+              >See How Tax Advisory Works</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="logo.png" class="footer-logo" alt="Anne Liang CPA" />
+            <p>
+              Bespoke tax strategy and advisory services for individuals and
+              families who expect nothing less than excellence.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="tax-advisory.html">Tax Strategy & Planning</a>
+            <a href="tax-preparation.html">Tax Preparation</a>
+            <a href="tax-calculator.html">Tax Calculator</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="about.html">About Anne</a>
+            <a href="index.html#testimonials">Client Stories</a>
+            <a href="#">Careers</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="mailto:hello@anneliang.com">hello@anneliang.com</a
+            ><a href="tel:+14155551234">(415) 555-1234</a
+            ><a href="#">San Francisco, CA</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Anne Liang CPA. All rights reserved.</span
+          ><span>Privacy Policy · Terms of Service</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="tax-estimator.js"></script>
+  </body>
+</html>
