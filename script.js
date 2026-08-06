@@ -102,3 +102,78 @@ if (testimonialTrack && testimonialDotsWrap && testimonialViewport) {
 
   goTo(0);
 }
+
+const articleGrid = document.getElementById("articleGrid");
+if (articleGrid) {
+  const showStatus = (message) => {
+    articleGrid.innerHTML = "";
+    const status = document.createElement("p");
+    status.className = "articles-status";
+    status.textContent = message;
+    articleGrid.appendChild(status);
+  };
+
+  fetch("/api/articles")
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data.articles || data.articles.length === 0) {
+        showStatus(
+          (data.errors && data.errors[0]) ||
+            "No articles available right now — check back soon.",
+        );
+        return;
+      }
+
+      articleGrid.innerHTML = "";
+      data.articles.forEach((article) => {
+        const link = /^https?:\/\//i.test(article.link) ? article.link : "#";
+
+        const card = document.createElement("div");
+        card.className = "article-card";
+
+        const source = document.createElement("div");
+        source.className = "article-source";
+        source.textContent = article.source;
+
+        const titleEl = document.createElement("h3");
+        titleEl.className = "article-title";
+        const titleLink = document.createElement("a");
+        titleLink.href = link;
+        titleLink.target = "_blank";
+        titleLink.rel = "noopener";
+        titleLink.textContent = article.title;
+        titleEl.appendChild(titleLink);
+
+        const summary = document.createElement("p");
+        summary.className = "article-summary";
+        summary.textContent = article.summary;
+
+        const meta = document.createElement("div");
+        meta.className = "article-meta";
+        const dateSpan = document.createElement("span");
+        dateSpan.textContent = article.pubDate
+          ? new Date(article.pubDate).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })
+          : "";
+        const readMore = document.createElement("a");
+        readMore.href = link;
+        readMore.target = "_blank";
+        readMore.rel = "noopener";
+        readMore.textContent = "Read More →";
+        meta.appendChild(dateSpan);
+        meta.appendChild(readMore);
+
+        card.appendChild(source);
+        card.appendChild(titleEl);
+        card.appendChild(summary);
+        card.appendChild(meta);
+        articleGrid.appendChild(card);
+      });
+    })
+    .catch(() => {
+      showStatus("Couldn't load articles right now — please try again later.");
+    });
+}

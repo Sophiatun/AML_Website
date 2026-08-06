@@ -1,0 +1,10 @@
+{
+  "name": "aml-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Anne Liang CPA website — static site with Netlify Functions for the article feed.",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0",
+    "fast-xml-parser": "^5.10.1"
+  }
+}
