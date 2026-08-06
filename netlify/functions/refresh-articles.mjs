@@ -1,8 +1,9 @@
 import { XMLParser } from "fast-xml-parser";
 import { getStore } from "@netlify/blobs";
 
-// Verified working RSS feeds (checked manually — IRS has no public feed
-// anymore, so it's intentionally not included here).
+// Verified working RSS feeds (checked manually — IRS and FTB have no
+// public feed, so they're handled as a static links block on the page
+// instead of a live source here).
 const FEEDS = [
   { name: "Tax Foundation", url: "https://taxfoundation.org/feed/" },
   {
@@ -13,9 +14,10 @@ const FEEDS = [
     name: "CPA Practice Advisor",
     url: "https://www.cpapracticeadvisor.com/feed/",
   },
+  { name: "Kiplinger", url: "https://www.kiplinger.com/taxes/feed" },
 ];
 
-const ITEMS_PER_FEED = 4;
+const ITEMS_PER_FEED = 8;
 const SUMMARY_MAX_LENGTH = 180;
 
 function stripHtml(html) {

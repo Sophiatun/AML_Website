@@ -105,16 +105,20 @@ if (testimonialTrack && testimonialDotsWrap && testimonialViewport) {
 
 const articleGrid = document.getElementById("articleGrid");
 const articlesBlock = document.getElementById("articlesBlock");
-const newsletterBlock = document.getElementById("newsletterBlock");
+const officialSourcesBlock = document.getElementById("officialSourcesBlock");
+const loadMoreWrap = document.getElementById("loadMoreWrap");
+const loadMoreBtn = document.getElementById("loadMoreBtn");
+const ARTICLES_INITIAL_COUNT = 6;
 
-// If the articles section stays hidden, the newsletter block below it
-// would otherwise still show a divider/spacing meant to separate it from
-// something above — strip that so the page still looks intentional.
+// If the articles section stays hidden, the next visible block (Official
+// Sources, which always shows) would otherwise still carry a
+// divider/spacing meant to separate it from something above — strip that
+// so the page still looks intentional either way.
 const collapseArticlesGap = () => {
-  if (!newsletterBlock) return;
-  newsletterBlock.style.marginTop = "0";
-  newsletterBlock.style.paddingTop = "0";
-  newsletterBlock.style.borderTop = "none";
+  if (!officialSourcesBlock) return;
+  officialSourcesBlock.style.marginTop = "0";
+  officialSourcesBlock.style.paddingTop = "0";
+  officialSourcesBlock.style.borderTop = "none";
 };
 
 if (articleGrid && articlesBlock) {
@@ -134,15 +138,15 @@ if (articleGrid && articlesBlock) {
       }
 
       articleGrid.innerHTML = "";
-      data.articles.forEach((article) => {
+      data.articles.forEach((article, index) => {
         const link = /^https?:\/\//i.test(article.link) ? article.link : "#";
 
         const card = document.createElement("div");
         card.className = "article-card";
-
-        const source = document.createElement("div");
-        source.className = "article-source";
-        source.textContent = article.source;
+        if (index >= ARTICLES_INITIAL_COUNT) {
+          card.style.display = "none";
+          card.dataset.moreArticle = "true";
+        }
 
         const titleEl = document.createElement("h3");
         titleEl.className = "article-title";
@@ -159,32 +163,50 @@ if (articleGrid && articlesBlock) {
 
         const meta = document.createElement("div");
         meta.className = "article-meta";
-        const dateSpan = document.createElement("span");
-        dateSpan.textContent = article.pubDate
+        const metaLeft = document.createElement("span");
+        const dateText = article.pubDate
           ? new Date(article.pubDate).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
               year: "numeric",
             })
           : "";
+        metaLeft.textContent = [article.source, dateText]
+          .filter(Boolean)
+          .join(" · ");
         const readMore = document.createElement("a");
         readMore.href = link;
         readMore.target = "_blank";
         readMore.rel = "noopener";
         readMore.textContent = "Read More →";
-        meta.appendChild(dateSpan);
+        meta.appendChild(metaLeft);
         meta.appendChild(readMore);
 
-        card.appendChild(source);
         card.appendChild(titleEl);
         card.appendChild(summary);
         card.appendChild(meta);
         articleGrid.appendChild(card);
       });
+
+      if (data.articles.length > ARTICLES_INITIAL_COUNT && loadMoreWrap) {
+        loadMoreWrap.style.display = "";
+      }
+
       articlesBlock.style.display = "";
     })
     .catch((err) => {
       console.error("Articles fetch failed (feed source or an ad blocker may be interfering):", err);
       collapseArticlesGap();
     });
+}
+
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener("click", () => {
+    document
+      .querySelectorAll('[data-more-article="true"]')
+      .forEach((card) => {
+        card.style.display = "";
+      });
+    loadMoreWrap.style.display = "none";
+  });
 }
