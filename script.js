@@ -173,7 +173,8 @@ if (articleGrid) {
         articleGrid.appendChild(card);
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.error("Articles fetch failed:", err);
       showStatus("Couldn't load articles right now — please try again later.");
     });
 }
