@@ -104,23 +104,32 @@ if (testimonialTrack && testimonialDotsWrap && testimonialViewport) {
 }
 
 const articleGrid = document.getElementById("articleGrid");
-if (articleGrid) {
-  const showStatus = (message) => {
-    articleGrid.innerHTML = "";
-    const status = document.createElement("p");
-    status.className = "articles-status";
-    status.textContent = message;
-    articleGrid.appendChild(status);
-  };
+const articlesBlock = document.getElementById("articlesBlock");
+const newsletterBlock = document.getElementById("newsletterBlock");
 
+// If the articles section stays hidden, the newsletter block below it
+// would otherwise still show a divider/spacing meant to separate it from
+// something above — strip that so the page still looks intentional.
+const collapseArticlesGap = () => {
+  if (!newsletterBlock) return;
+  newsletterBlock.style.marginTop = "0";
+  newsletterBlock.style.paddingTop = "0";
+  newsletterBlock.style.borderTop = "none";
+};
+
+if (articleGrid && articlesBlock) {
+  // Fails silently on purpose: a visitor should never see a broken-looking
+  // "couldn't load" message (e.g. from an ad blocker interfering with the
+  // fetch). If there's nothing to show, the whole section just stays
+  // hidden. Errors are still logged to the console for debugging.
   fetch("/api/articles")
     .then((res) => res.json())
     .then((data) => {
       if (!data.articles || data.articles.length === 0) {
-        showStatus(
-          (data.errors && data.errors[0]) ||
-            "No articles available right now — check back soon.",
-        );
+        if (data.errors && data.errors.length) {
+          console.warn("Articles feed:", data.errors.join("; "));
+        }
+        collapseArticlesGap();
         return;
       }
 
@@ -172,9 +181,10 @@ if (articleGrid) {
         card.appendChild(meta);
         articleGrid.appendChild(card);
       });
+      articlesBlock.style.display = "";
     })
     .catch((err) => {
-      console.error("Articles fetch failed:", err);
-      showStatus("Couldn't load articles right now — please try again later.");
+      console.error("Articles fetch failed (feed source or an ad blocker may be interfering):", err);
+      collapseArticlesGap();
     });
 }
