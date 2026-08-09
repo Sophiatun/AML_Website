@@ -1400,6 +1400,10 @@ nav .container {
   border: 1px solid rgba(201, 168, 76, 0.12);
   padding: 44px 40px;
 }
+.contact-form-wrap iframe {
+  background: #fff;
+  border-radius: 12px;
+}
 .contact-form-wrap h3 {
   font-family: var(--font-display);
   font-size: 22px;
