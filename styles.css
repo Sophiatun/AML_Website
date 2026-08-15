@@ -72,8 +72,8 @@ nav .container {
   text-decoration: none;
 }
 .nav-logo {
-  height: 30px;
-  width: 42px;
+  height: 40px;
+  width: 55px;
   opacity: 0.95;
   transition: opacity 0.3s;
 }
@@ -339,9 +339,9 @@ nav .container {
   font-size: 25px;
   line-height: 1.8;
   color: var(--text-muted);
-  max-width: 720px;
+  max-width: 620px;
   margin: 0 auto 48px;
-  font-weight: 300;
+  font-weight: 250;
 }
 .hero-actions {
   display: flex;
@@ -356,7 +356,7 @@ nav .container {
   gap: 10px;
   background: var(--gold);
   color: var(--emerald-deep);
-  padding: 19px 44px;
+  padding: 15px 25px;
   font-size: 13px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -524,6 +524,12 @@ nav .container {
   line-height: 1.75;
   font-weight: 300;
 }
+.page-header-highlight {
+  color: var(--gold-light) !important;
+  font-size: 15px !important;
+  margin-top: 16px !important;
+  letter-spacing: 0.3px;
+}
 
 .about-strip {
   padding: 100px 0;
@@ -570,7 +576,7 @@ nav .container {
 }
 
 .services {
-  padding: 100px 0;
+  padding: 70px 0 100px;
 }
 .section-header {
   text-align: center;
@@ -609,7 +615,7 @@ nav .container {
     rgba(20, 56, 43, 0.8)
   );
   border: 1px solid rgba(201, 168, 76, 0.08);
-  padding: 48px 40px;
+  padding: 32px 28px;
   position: relative;
   overflow: hidden;
   transition: all 0.5s;
@@ -750,7 +756,7 @@ nav .container {
   line-height: 1.3;
 }
 .narrative-item p {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-muted);
   line-height: 1.7;
   font-weight: 300;
@@ -798,7 +804,7 @@ nav .container {
   margin-bottom: 6px;
 }
 .qualifier-item p {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-muted);
   line-height: 1.6;
   font-weight: 300;
@@ -836,7 +842,7 @@ nav .container {
   gap: 10px;
 }
 .prep-col li {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-body);
   font-weight: 300;
   line-height: 1.5;
@@ -894,7 +900,7 @@ nav .container {
   margin-bottom: 10px;
 }
 .guarantee-item p {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-muted);
   line-height: 1.7;
   font-weight: 300;
@@ -971,7 +977,7 @@ nav .container {
 }
 .step p {
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7;
   font-weight: 300;
 }
@@ -1401,7 +1407,7 @@ nav .container {
   padding: 44px 40px;
 }
 .contact-form-wrap iframe {
-  background: var(--gold);
+  background: #0b4530;
   border-radius: 12px;
 }
 .contact-form-wrap h3 {
@@ -1655,8 +1661,9 @@ footer {
   font-weight: 300;
 }
 .footer-logo {
-  height: 40px;
-  opacity: 0.8;
+  height: 250px;
+  width: 220px;
+  opacity: 1;
 }
 .footer-col h4 {
   font-size: 11px;
@@ -1788,6 +1795,10 @@ footer {
 #services .section-header p,
 #testimonials .section-header p {
   font-size: 17px;
+}
+#services .section-header p {
+  max-width: 1200px;
+  text-wrap: balance;
 }
 #services .service-card h3 {
   font-size: 28px;

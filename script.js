@@ -1,3 +1,8 @@
+const copyrightYear = document.getElementById("copyright-year");
+if (copyrightYear) {
+  copyrightYear.textContent = new Date().getFullYear();
+}
+
 const nav = document.getElementById("nav");
 window.addEventListener("scroll", () => {
   nav.classList.toggle("scrolled", window.scrollY > 50);
