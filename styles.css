@@ -1198,53 +1198,131 @@ nav .container {
   padding: 100px 0;
 }
 .testimonial-carousel {
-  max-width: 1000px;
+  position: relative;
   margin: 60px auto 0;
+  padding: 0 76px;
   overflow: hidden;
 }
 .testimonial-track {
   display: flex;
-  transition: transform 0.5s ease;
+  align-items: flex-start;
+  gap: 28px;
   cursor: grab;
   touch-action: pan-y;
   user-select: none;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .testimonial-track:active {
   cursor: grabbing;
 }
-.testimonial-page {
-  flex: 0 0 100%;
-  width: 100%;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-}
 .testimonial-card {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 780px;
+  overflow: hidden;
   background: linear-gradient(
     160deg,
-    rgba(30, 74, 58, 0.4),
-    rgba(20, 56, 43, 0.6)
+    rgba(30, 74, 58, 0.5),
+    rgba(20, 56, 43, 0.75)
   );
-  border: 1px solid rgba(201, 168, 76, 0.1);
-  border-radius: 18px;
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: 16px;
   padding: 40px;
   position: relative;
+  opacity: 0.5;
+  filter: blur(0.5px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  transform: scale(0.86);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    filter 0.6s ease,
+    box-shadow 0.6s ease;
+}
+.testimonial-card.is-active {
+  opacity: 1;
+  filter: none;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  transform: scale(1);
+  z-index: 2;
 }
 .testimonial-card::before {
   content: "\201C";
   font-family: var(--font-display);
-  font-size: 64px;
+  font-size: 56px;
   color: var(--gold);
-  opacity: 0.25;
+  opacity: 0.3;
   position: absolute;
   top: 14px;
   left: 24px;
   line-height: 1;
 }
-@media (max-width: 700px) {
-  .testimonial-page {
-    grid-template-columns: 1fr;
+.testimonial-divider {
+  height: 1px;
+  background: rgba(201, 168, 76, 0.2);
+  flex-shrink: 0;
+}
+.testimonial-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  background: rgba(20, 56, 43, 0.6);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 4;
+}
+.testimonial-arrow:hover {
+  background: var(--gold);
+  color: var(--emerald-deep);
+  border-color: var(--gold);
+}
+.testimonial-arrow:focus-visible,
+.dot:focus-visible,
+.testimonial-track:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+.testimonial-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+.testimonial-arrow-prev {
+  left: 0;
+}
+.testimonial-arrow-next {
+  right: 0;
+}
+@media (max-width: 900px) {
+  .testimonial-carousel {
+    padding: 0 56px;
+  }
+}
+@media (max-width: 560px) {
+  .testimonial-carousel {
+    padding: 0 44px;
+  }
+  .testimonial-arrow {
+    width: 36px;
+    height: 36px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-track {
+    transition: none;
+  }
+  .testimonial-card {
+    transition: none;
   }
 }
 .testimonial-dots {
@@ -1274,19 +1352,27 @@ nav .container {
 .testimonial-text {
   font-family: var(--font-display);
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--cream);
   font-weight: 300;
   font-style: italic;
-  margin-bottom: 24px;
-  margin-top: 28px;
+  margin: 28px 0 0;
+  flex: 1 1 auto;
+  overflow: hidden;
   position: relative;
   z-index: 1;
+}
+.testimonial-text p {
+  margin: 0 0 14px;
+}
+.testimonial-text p:last-child {
+  margin-bottom: 0;
 }
 .testimonial-author {
   display: flex;
   align-items: center;
   gap: 14px;
+  flex-shrink: 0;
 }
 .testimonial-avatar {
   width: 44px;
@@ -1304,11 +1390,6 @@ nav .container {
   font-size: 14px;
   color: var(--cream);
   font-weight: 500;
-}
-.testimonial-role {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
 }
 
 .contact-section {
@@ -1790,7 +1871,7 @@ footer {
 }
 #services .section-header h2,
 #testimonials .section-header h2 {
-  font-size: clamp(34px, 4.4vw, 56px);
+  font-size: clamp(40px, 6vw, 72px);
 }
 #services .section-header p,
 #testimonials .section-header p {
@@ -1814,9 +1895,6 @@ footer {
 }
 #testimonials .testimonial-name {
   font-size: 15px;
-}
-#testimonials .testimonial-role {
-  font-size: 13px;
 }
 #contact .contact-copy h2 {
   font-size: clamp(34px, 4.8vw, 56px);
