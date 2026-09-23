@@ -709,6 +709,23 @@ nav .container {
   margin-bottom: 24px;
   text-align: center;
 }
+.story-lede {
+  max-width: 640px;
+  margin: 0 auto 40px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.75;
+  font-weight: 300;
+}
+.story-footnote {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
 .story-block {
   max-width: 860px;
   margin: 72px auto 0;
