@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Started — Anne Liang CPA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Libre+Franklin:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <nav id="nav">
+      <div class="container">
+        <a href="index.html" class="nav-brand">
+          <img src="logo-icon.png" class="nav-logo" alt="Anne Liang CPA" />
+          <span class="nav-brand-name">Anne Liang, <em>CPA</em></span>
+        </a>
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <div class="nav-item">
+            <a href="index.html#services" class="nav-dropdown-trigger"
+              >Services
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M6 9l6 6 6-6" /></svg
+            ></a>
+            <div class="nav-dropdown">
+              <a href="tax-advisory.html">Tax Strategy &amp; Planning</a>
+              <a href="tax-preparation.html">Tax Preparation</a>
+            </div>
+          </div>
+          <a href="tax-calculator.html">Tax Calculator</a>
+          <a href="resources.html">Resources</a>
+          <a href="index.html#contact" class="nav-cta"
+            >Schedule a Consultation</a
+          >
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <header class="page-header">
+      <div class="container">
+        <h1>Let's Get <em>Started</em></h1>
+        <p>
+          Tell us a bit about your tax situation so we can prepare for your
+          engagement. The more detail you can share, the better we can plan
+          from day one.
+        </p>
+        <p class="page-header-highlight">
+          Our team will follow up within one business day to confirm next
+          steps.
+        </p>
+      </div>
+    </header>
+
+    <div class="section-divider"></div>
+
+    <section class="services">
+      <div class="container">
+        <div class="story-block" style="max-width: 720px">
+          <div
+            class="contact-form-wrap reveal"
+            style="max-width: 100%; margin: 0 auto"
+          >
+            <!--
+              TODO: Replace REPLACE_ME below with the real Tally form id once
+              the "New Client Application" form is built in Tally. Use the
+              field list drafted in the project conversation as the starting
+              question set.
+            -->
+            <iframe
+              data-tally-src="https://tally.so/embed/REPLACE_ME?hideTitle=1&dynamicHeight=1"
+              loading="lazy"
+              width="100%"
+              height="700"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              title="New Client Application"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img src="logo.png" class="footer-logo" alt="Anne Liang CPA" />
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="tax-advisory.html">Tax Strategy &amp; Planning</a>
+            <a href="tax-preparation.html">Tax Preparation</a>
+            <a href="tax-calculator.html">Tax Calculator</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="about.html">About Anne</a>
+            <a href="index.html#testimonials">Client Stories</a>
+            <a href="resources.html">Resources</a>
+            <a href="#">Careers</a>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <a href="mailto:hello@anneliang.com">hello@anneliang.com</a
+            ><a href="tel:+14155551234">(415) 555-1234</a
+            ><a href="#">San Francisco, CA</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; <span id="copyright-year"></span> Anne Liang CPA. All rights reserved.</span
+          ><span>Privacy Policy · Terms of Service</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      (function (d, w) {
+        var v = function () {
+          if (typeof Tally !== "undefined") {
+            Tally.loadEmbeds();
+          } else {
+            d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(
+              function (e) {
+                e.src = e.dataset.tallySrc;
+              },
+            );
+          }
+        };
+        if (typeof Tally !== "undefined") {
+          v();
+        } else if (d.querySelector('script[src="' + w + '"]') == null) {
+          var s = d.createElement("script");
+          s.src = w;
+          s.onload = v;
+          s.onerror = v;
+          d.body.appendChild(s);
+        }
+      })(document, "https://tally.so/widgets/embed.js");
+    </script>
+  </body>
+</html>
